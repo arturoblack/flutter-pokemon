@@ -15,4 +15,12 @@ class PokemonService {
         .toList();
     return pkmns;
   }
+
+  Future<PokemonInfo> getPokemon({required int pkmnNumber}) async {
+    Response response =
+        await Dio().get('https://pokeapi.co/api/v2/pokemon/$pkmnNumber');
+    print(response);
+    PokemonInfo pkmn = PokemonInfo.fromMap(response.data);
+    return pkmn;
+  }
 }

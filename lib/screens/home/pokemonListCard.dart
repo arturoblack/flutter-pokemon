@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/data/models/pokemon.dart';
 import 'package:flutter_demo/data/services/pokemon.service.dart';
+import 'package:flutter_demo/screens/pokemon/pkmInfo.screen.dart';
 
 class PokemonListCard extends StatefulWidget {
   @override
@@ -61,21 +62,32 @@ class _PokemonListCardState extends State<PokemonListCard> {
     return Container(
       padding: EdgeInsets.all(16),
       child: Card(
-        child: Container(
-          padding: EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Image.network(
-                pkmn.imageUrl,
-                width: 60,
-              ),
-              // Text(pkmn.imageUrl),
-              SizedBox(width: 16),
-              Text(
-                pkmn.name,
-                style: TextStyle(fontSize: 24),
-              ),
-            ],
+        child: InkWell(
+          splashColor: Colors.red,
+          focusColor: Colors.green,
+          onTap: () {
+            print('go to ${pkmn.number}');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => PokemonInfoScreen(pkmn.number)),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Image.network(
+                  pkmn.imageUrl,
+                  width: 60,
+                ),
+                // Text(pkmn.imageUrl),
+                SizedBox(width: 16),
+                Text(
+                  pkmn.name,
+                  style: TextStyle(fontSize: 24),
+                ),
+              ],
+            ),
           ),
         ),
       ),
